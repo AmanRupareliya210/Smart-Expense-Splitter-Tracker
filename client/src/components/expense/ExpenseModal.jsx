@@ -4,7 +4,7 @@ import { CATEGORIES, SPLIT_TYPES } from '../../utils/constants';
 import { expenseService } from '../../services/expenseService';
 import { useAuth } from '../../context/AuthContext';
 import { formatCurrency, getInitials } from '../../utils/formatters';
-import { DollarSign, Calendar, Check, AlertCircle, Sparkles } from 'lucide-react';
+import { IndianRupee, Calendar, Check, AlertCircle, Sparkles } from 'lucide-react';
 
 export const ExpenseModal = ({ isOpen, onClose, group, onExpenseSaved, existingExpense = null }) => {
   const { user } = useAuth();

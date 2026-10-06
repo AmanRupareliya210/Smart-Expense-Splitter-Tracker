@@ -6,7 +6,7 @@ import {
   PieChart,
   TrendingUp,
   Users,
-  DollarSign,
+  IndianRupee,
   Calendar,
   Filter,
   BarChart3,
@@ -14,7 +14,7 @@ import {
   RotateCcw
 } from 'lucide-react';
 
-export const AnalyticsView = ({ groupId, currency = 'USD' }) => {
+export const AnalyticsView = ({ groupId, currency = 'INR' }) => {
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('all'); // 'all' | 'this_month' | 'last_30_days' | 'last_90_days' | 'this_year' | 'custom'
@@ -160,7 +160,7 @@ export const AnalyticsView = ({ groupId, currency = 'USD' }) => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
             <div className="glass-card" style={{ borderLeft: '4px solid var(--accent-primary)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
-                <DollarSign size={18} color="var(--accent-primary)" />
+                <IndianRupee size={18} color="var(--accent-primary)" />
                 <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Total Window Spending</span>
               </div>
               <div className="font-mono" style={{ fontSize: '1.85rem', fontWeight: 800, color: 'var(--text-primary)' }}>

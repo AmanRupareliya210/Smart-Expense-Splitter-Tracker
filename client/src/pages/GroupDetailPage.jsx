@@ -27,7 +27,7 @@ import {
   ArrowLeft,
   Trash2,
   Edit2,
-  DollarSign,
+  IndianRupee,
   Users,
   Shield,
   ShieldCheck,
@@ -480,7 +480,7 @@ export const GroupDetailPage = ({ groupId, onBack }) => {
                   className="btn btn-emerald"
                   style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
                 >
-                  <DollarSign size={16} />
+                  <IndianRupee size={16} />
                   <span>Settle Up</span>
                 </button>
 

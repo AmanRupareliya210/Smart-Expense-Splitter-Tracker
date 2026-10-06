@@ -23,7 +23,7 @@ import {
   PieChart,
   RefreshCw,
   Sparkles,
-  DollarSign
+  IndianRupee
 } from 'lucide-react';
 
 export const DashboardPage = ({ onSelectGroup, onOpenCreateGroup }) => {
@@ -157,7 +157,7 @@ export const DashboardPage = ({ onSelectGroup, onOpenCreateGroup }) => {
                   justifyContent: 'center'
                 }}
               >
-                <DollarSign size={18} color="var(--accent-cyan)" />
+                <IndianRupee size={18} color="var(--accent-cyan)" />
               </div>
             </div>
             <div className="font-mono text-cyan" style={{ fontSize: '1.75rem', fontWeight: 800 }}>
