@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="brandBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <linearGradient id="edgeGleam" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+    </linearGradient>
+
+    <linearGradient id="pathGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#d1fae5" />
+    </linearGradient>
+
+    <linearGradient id="mintAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6ee7b7" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#064e3b" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <!-- Premium Smooth Squircle Container -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#brandBg)" />
+  <rect x="2" y="2" width="60" height="60" rx="16" stroke="url(#edgeGleam)" stroke-width="1.5" />
+
+  <!-- Modern Geometric Interlocking Split Flow Emblem -->
+  <g filter="url(#softShadow)">
+    <!-- Primary Left Flow (Splitting Curve) -->
+    <path 
+      d="M19 43C19 33.5 24.5 29 32 29C39.5 29 45 24.5 45 15" 
+      stroke="url(#pathGlow)" 
+      stroke-width="5" 
+      stroke-linecap="round"
+    />
+
+    <!-- Secondary Complementary Split Branch -->
+    <path 
+      d="M19 21C19 27 23.5 29 28 29" 
+      stroke="url(#mintAccent)" 
+      stroke-width="5" 
+      stroke-linecap="round"
+    />
+
+    <path 
+      d="M36 35C40.5 35 45 37 45 49" 
+      stroke="url(#mintAccent)" 
+      stroke-width="5" 
+      stroke-linecap="round"
+    />
+
+    <!-- Precision Connection / Equilibrium Dots -->
+    <circle cx="45" cy="15" r="4.5" fill="#ffffff" />
+    <circle cx="45" cy="15" r="2" fill="#059669" />
+
+    <circle cx="19" cy="43" r="4.5" fill="#ffffff" />
+    <circle cx="19" cy="43" r="2" fill="#059669" />
+
+    <!-- Center Balance Diamond Core -->
+    <rect 
+      x="28.5" 
+      y="25.5" 
+      width="7" 
+      height="7" 
+      rx="2" 
+      transform="rotate(45 32 29)" 
+      fill="#ffffff" 
+    />
+  </g>
+</svg>

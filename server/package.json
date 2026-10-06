@@ -1,0 +1,33 @@
+{
+  "name": "smart-expense-splitter-server",
+  "version": "1.0.0",
+  "description": "Backend API for Smart Expense Splitter & Tracker",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test_auth_and_health.js && node test_group_management.js && node test_splits_and_ledger.js && node test_balances_and_settlements.js && node test_dashboard_and_analytics.js && node test_notifications_and_reminders.js && node e2e_verification_script.js",
+    "test:auth": "node test_auth_and_health.js",
+    "test:groups": "node test_group_management.js",
+    "test:splits": "node test_splits_and_ledger.js",
+    "test:balances": "node test_balances_and_settlements.js",
+    "test:analytics": "node test_dashboard_and_analytics.js",
+    "test:notifications": "node test_notifications_and_reminders.js",
+    "test:e2e": "node e2e_verification_script.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

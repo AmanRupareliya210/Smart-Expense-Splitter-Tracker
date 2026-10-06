@@ -1,0 +1,17 @@
+{
+  "name": "smart-expense-splitter-tracker",
+  "version": "1.0.0",
+  "description": "Smart Expense Splitter & Tracker full-stack application",
+  "main": "server/server.js",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "dev": "node run-dev.js",
+    "test": "npm test --prefix server",
+    "build": "npm run build --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
