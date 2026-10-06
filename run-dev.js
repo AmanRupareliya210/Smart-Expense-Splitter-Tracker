@@ -15,8 +15,14 @@ const serverProcess = spawn('node', ['server.js'], {
   env: { ...process.env, FORCE_COLOR: '1' }
 });
 
+const fs = require('fs');
+
 // Start Client (Vite)
-const viteBin = path.join(clientDir, 'node_modules', 'vite', 'bin', 'vite.js');
+let viteBin = path.join(rootDir, 'node_modules', 'vite', 'bin', 'vite.js');
+if (!fs.existsSync(viteBin)) {
+  viteBin = path.join(clientDir, 'node_modules', 'vite', 'bin', 'vite.js');
+}
+
 const clientProcess = spawn('node', [viteBin], {
   cwd: clientDir,
   stdio: 'pipe',
