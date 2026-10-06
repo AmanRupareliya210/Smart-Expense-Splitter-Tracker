@@ -2,7 +2,8 @@ import { CURRENCY_SYMBOLS } from './constants';
 
 // Format cents (1250) to formatted currency (₹12.50)
 export const formatCurrency = (cents, currency = 'INR') => {
-  const symbol = CURRENCY_SYMBOLS[currency] || '₹';
+  const activeCurr = (!currency || currency === 'USD') ? 'INR' : currency;
+  const symbol = CURRENCY_SYMBOLS[activeCurr] || '₹';
   const amount = (Math.abs(cents || 0) / 100).toFixed(2);
   const sign = (cents || 0) < 0 ? '-' : '';
   return `${sign}${symbol}${amount}`;
