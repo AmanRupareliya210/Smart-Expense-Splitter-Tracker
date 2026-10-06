@@ -8,7 +8,7 @@ export const RegisterPage = ({ onNavigate }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [defaultCurrency, setDefaultCurrency] = useState('USD');
+  const [defaultCurrency, setDefaultCurrency] = useState('INR');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 

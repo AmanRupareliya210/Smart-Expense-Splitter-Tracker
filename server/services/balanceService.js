@@ -121,12 +121,12 @@ const calculateGroupBalances = async (groupId) => {
   });
 
   // 4. Compute Minimal Settlements via Debt Minimizer Engine
-  const simplifiedSettlements = simplifyDebts(memberBalances, group.currency || 'USD');
+  const simplifiedSettlements = simplifyDebts(memberBalances, group.currency || 'INR');
 
   return {
     groupId: group._id.toString(),
     groupName: group.name,
-    currency: group.currency || 'USD',
+    currency: group.currency || 'INR',
     totalSpending: totalGroupSpending,
     expenseCount: expenses.length,
     settlementCount: settlements.length,

@@ -58,7 +58,7 @@ const notificationService = {
     try {
       const payerName = payerUser?.name || 'A member';
       const groupName = group?.name || 'your group';
-      const formattedAmount = `${expense.currency || 'USD'} ${toDecimal(expense.totalAmount)}`;
+      const formattedAmount = `${expense.currency || 'INR'} ${toDecimal(expense.totalAmount)}`;
 
       const notifications = [];
       const seenRecipients = new Set();
@@ -69,7 +69,7 @@ const notificationService = {
 
         if (participantId !== payerId && !seenRecipients.has(participantId)) {
           seenRecipients.add(participantId);
-          const splitAmount = `${expense.currency || 'USD'} ${toDecimal(split.amount)}`;
+          const splitAmount = `${expense.currency || 'INR'} ${toDecimal(split.amount)}`;
 
           notifications.push({
             recipient: participantId,
@@ -185,7 +185,7 @@ const notificationService = {
       const groupName = group?.name || 'your group';
       const payerName = payerUser?.name || 'A member';
       const receiverName = receiverUser?.name || 'A member';
-      const formattedAmount = `${settlement.currency || 'USD'} ${toDecimal(settlement.amount)}`;
+      const formattedAmount = `${settlement.currency || 'INR'} ${toDecimal(settlement.amount)}`;
 
       const payerId = (payerUser?._id || settlement.paidBy).toString();
       const receiverId = (receiverUser?._id || settlement.paidTo).toString();
@@ -242,7 +242,7 @@ const notificationService = {
     try {
       const groupName = group?.name || 'your group';
       const reverserName = reverserUser?.name || 'An admin';
-      const formattedAmount = `${settlement.currency || 'USD'} ${toDecimal(settlement.amount)}`;
+      const formattedAmount = `${settlement.currency || 'INR'} ${toDecimal(settlement.amount)}`;
       const reverserId = (reverserUser?._id || reverserUser).toString();
 
       const payerId = (settlement.paidBy?._id || settlement.paidBy).toString();
@@ -310,7 +310,7 @@ const notificationService = {
     try {
       const creditorName = creditorUser?.name || 'A friend';
       const groupName = group?.name || 'your group';
-      const formattedAmount = `${currency || 'USD'} ${toDecimal(amount)}`;
+      const formattedAmount = `${currency || 'INR'} ${toDecimal(amount)}`;
       const debtorId = (debtorUser?._id || debtorUser).toString();
       const creditorId = (creditorUser?._id || creditorUser).toString();
 

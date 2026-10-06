@@ -8,7 +8,7 @@ export const EditGroupModal = ({ isOpen, onClose, group, onGroupUpdated }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('Trip');
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState('INR');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -17,7 +17,7 @@ export const EditGroupModal = ({ isOpen, onClose, group, onGroupUpdated }) => {
       setName(group.name || '');
       setDescription(group.description || '');
       setCategory(group.category || 'Other');
-      setCurrency(group.currency || 'USD');
+      setCurrency(group.currency || 'INR');
       setError('');
     }
   }, [group, isOpen]);

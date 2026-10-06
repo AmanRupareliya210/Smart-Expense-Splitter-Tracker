@@ -31,8 +31,8 @@ const settlementSchema = new mongoose.Schema(
     },
     currency: {
       type: String,
-      default: 'USD',
-      enum: ['USD', 'EUR', 'GBP', 'INR', 'CAD', 'AUD', 'JPY']
+      default: 'INR',
+      enum: ['INR', 'USD', 'EUR', 'GBP', 'CAD', 'AUD', 'JPY']
     },
     paymentMethod: {
       type: String,

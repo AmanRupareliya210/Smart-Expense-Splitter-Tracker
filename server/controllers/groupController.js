@@ -34,10 +34,10 @@ const createGroup = async (req, res, next) => {
     const validCategories = ['Trip', 'Home', 'Event', 'Project', 'Couple', 'Other'];
     const selectedCategory = validCategories.includes(category) ? category : 'Other';
 
-    const validCurrencies = ['USD', 'EUR', 'GBP', 'INR', 'CAD', 'AUD', 'JPY'];
+    const validCurrencies = ['INR', 'USD', 'EUR', 'GBP', 'CAD', 'AUD', 'JPY'];
     const selectedCurrency = validCurrencies.includes(currency)
       ? currency
-      : req.user.defaultCurrency || 'USD';
+      : req.user.defaultCurrency || 'INR';
 
     const group = await Group.create({
       name: name.trim(),
@@ -312,7 +312,7 @@ const addMember = async (req, res, next) => {
         name: defaultName.charAt(0).toUpperCase() + defaultName.slice(1),
         email: normalizedEmail,
         password: generatedPassword,
-        defaultCurrency: group.currency || 'USD'
+        defaultCurrency: group.currency || 'INR'
       });
     }
 

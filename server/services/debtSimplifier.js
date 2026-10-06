@@ -38,7 +38,7 @@ const ApiError = require('../utils/apiError');
  * @param {string} [currency='USD'] Group currency code
  * @returns {Array<{from: {id: string, name: string, email: string, avatarUrl: string}, to: {id: string, name: string, email: string, avatarUrl: string}, amount: number, currency: string}>}
  */
-const simplifyDebts = (memberBalances = [], currency = 'USD') => {
+const simplifyDebts = (memberBalances = [], currency = 'INR') => {
   if (!Array.isArray(memberBalances) || memberBalances.length <= 1) {
     return [];
   }

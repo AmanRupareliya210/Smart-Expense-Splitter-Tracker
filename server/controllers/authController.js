@@ -26,7 +26,7 @@ const register = async (req, res, next) => {
       name,
       email: email.toLowerCase(),
       password,
-      defaultCurrency: defaultCurrency || 'USD'
+      defaultCurrency: defaultCurrency || 'INR'
     });
 
     const token = generateToken(user._id);
@@ -161,11 +161,21 @@ const quickLogin = async (req, res, next) => {
         name: 'Aman',
         email: adminEmail,
         password: 'Password@123',
-        defaultCurrency: 'USD'
+        defaultCurrency: 'INR'
       });
-    } else if (user.email !== adminEmail) {
-      user.email = adminEmail;
-      await user.save();
+    } else {
+      let modified = false;
+      if (user.email !== adminEmail) {
+        user.email = adminEmail;
+        modified = true;
+      }
+      if (!user.defaultCurrency || user.defaultCurrency === 'USD') {
+        user.defaultCurrency = 'INR';
+        modified = true;
+      }
+      if (modified) {
+        await user.save();
+      }
     }
 
     const token = generateToken(user._id);

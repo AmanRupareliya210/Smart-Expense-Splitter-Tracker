@@ -49,8 +49,8 @@ const expenseSchema = new mongoose.Schema(
     },
     currency: {
       type: String,
-      default: 'USD',
-      enum: ['USD', 'EUR', 'GBP', 'INR', 'CAD', 'AUD', 'JPY']
+      default: 'INR',
+      enum: ['INR', 'USD', 'EUR', 'GBP', 'CAD', 'AUD', 'JPY']
     },
     paidBy: {
       type: mongoose.Schema.Types.ObjectId,

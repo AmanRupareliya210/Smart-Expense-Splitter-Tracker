@@ -30,7 +30,7 @@ const getUserDashboardAnalytics = async (req, res, next) => {
           globalNetBalance: 0,
           activeGroupCount: 0,
           archivedGroupCount: 0,
-          currency: req.user.defaultCurrency || 'USD'
+          currency: req.user.defaultCurrency || 'INR'
         },
         groupSummaries: [],
         categorySpending: [],
@@ -141,7 +141,7 @@ const getUserDashboardAnalytics = async (req, res, next) => {
         globalNetBalance: totalOwedToUser - totalUserOwes,
         activeGroupCount: activeGroups.length,
         archivedGroupCount: archivedGroups.length,
-        currency: req.user.defaultCurrency || 'USD'
+        currency: req.user.defaultCurrency || 'INR'
       },
       groupSummaries,
       categorySpending,
@@ -310,7 +310,7 @@ const getGroupAnalytics = async (req, res, next) => {
     }));
 
     return sendSuccess(res, 200, 'Group analytics generated successfully', {
-      currency: req.group.currency || 'USD',
+      currency: req.group.currency || 'INR',
       summary: {
         totalSpending,
         expenseCount,

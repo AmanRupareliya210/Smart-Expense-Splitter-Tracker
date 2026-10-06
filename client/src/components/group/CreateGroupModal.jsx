@@ -10,7 +10,7 @@ export const CreateGroupModal = ({ isOpen, onClose, onGroupCreated }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('Trip');
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState('INR');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 

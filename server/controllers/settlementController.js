@@ -71,7 +71,7 @@ const recordSettlement = async (req, res, next) => {
       paidBy: payerId,
       paidTo: receiverId,
       amount: settleCents,
-      currency: group.currency || 'USD',
+      currency: group.currency || 'INR',
       paymentMethod: finalMethod,
       status: 'CONFIRMED',
       notes: notes ? notes.trim() : '',
@@ -354,10 +354,10 @@ const getGroupBalances = async (req, res, next) => {
 const getSettlementSuggestions = async (req, res, next) => {
   try {
     const balances = await calculateGroupBalances(req.group._id);
-    const suggestions = simplifyDebts(balances.memberBalances, req.group.currency || 'USD');
+    const suggestions = simplifyDebts(balances.memberBalances, req.group.currency || 'INR');
 
     return sendSuccess(res, 200, 'Settlement suggestions calculated successfully', {
-      currency: req.group.currency || 'USD',
+      currency: req.group.currency || 'INR',
       transferCount: suggestions.length,
       suggestions
     });

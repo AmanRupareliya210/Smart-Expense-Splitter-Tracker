@@ -80,7 +80,7 @@ const addExpense = async (req, res, next) => {
       groupId: group._id,
       title: expenseTitle,
       totalAmount: totalCents,
-      currency: group.currency || 'USD',
+      currency: group.currency || 'INR',
       paidBy: payerId,
       splitType: finalSplitType,
       splits: calculatedSplits,

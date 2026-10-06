@@ -65,7 +65,7 @@ export const DashboardPage = ({ onSelectGroup, onOpenCreateGroup }) => {
     return matchesSearch && matchesCat;
   });
 
-  const currency = user?.defaultCurrency || 'USD';
+  const currency = user?.defaultCurrency || 'INR';
   const totalPaid = dashboardData?.summary?.totalExpensesPaid ?? globalSummary?.totalExpensesPaid ?? 0;
   const totalOwed = dashboardData?.summary?.totalOwedToUser ?? globalSummary?.totalOwedToUser ?? 0;
   const totalOwes = dashboardData?.summary?.totalUserOwes ?? globalSummary?.totalUserOwes ?? 0;
