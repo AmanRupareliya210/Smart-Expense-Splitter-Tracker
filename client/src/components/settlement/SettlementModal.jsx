@@ -165,7 +165,7 @@ export const SettlementModal = ({
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '1rem' }}>
           <div className="form-group">
-            <label className="form-label">Settlement Amount ({group?.currency || 'USD'}) *</label>
+            <label className="form-label">Settlement Amount ({group?.currency || 'INR'}) *</label>
             <div style={{ position: 'relative' }}>
               <input
                 type="number"

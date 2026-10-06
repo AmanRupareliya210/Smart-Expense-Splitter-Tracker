@@ -16,7 +16,7 @@ export const ExpenseDetailModal = ({
 
   if (!isOpen || !expense) return null;
 
-  const currency = group?.currency || expense.currency || 'USD';
+  const currency = group?.currency || expense?.currency || 'INR';
   const categoryInfo = CATEGORIES.find((c) => c.id === expense.category) || {
     label: expense.category || 'Other',
     color: '#6366f1'

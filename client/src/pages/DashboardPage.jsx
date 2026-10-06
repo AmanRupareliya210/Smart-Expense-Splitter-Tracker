@@ -65,7 +65,7 @@ export const DashboardPage = ({ onSelectGroup, onOpenCreateGroup }) => {
     return matchesSearch && matchesCat;
   });
 
-  const currency = user?.defaultCurrency || 'INR';
+  const currency = (user?.defaultCurrency && user.defaultCurrency !== 'USD') ? user.defaultCurrency : 'INR';
   const totalPaid = dashboardData?.summary?.totalExpensesPaid ?? globalSummary?.totalExpensesPaid ?? 0;
   const totalOwed = dashboardData?.summary?.totalOwedToUser ?? globalSummary?.totalOwedToUser ?? 0;
   const totalOwes = dashboardData?.summary?.totalUserOwes ?? globalSummary?.totalUserOwes ?? 0;
@@ -810,7 +810,7 @@ export const DashboardPage = ({ onSelectGroup, onOpenCreateGroup }) => {
                           </div>
 
                           <div className="font-mono text-emerald" style={{ fontSize: '1rem', fontWeight: 700 }}>
-                            {formatCurrency(settle.amount, settle.currency || 'USD')}
+                            {formatCurrency(settle.amount, settle.currency || 'INR')}
                           </div>
                         </div>
                       );

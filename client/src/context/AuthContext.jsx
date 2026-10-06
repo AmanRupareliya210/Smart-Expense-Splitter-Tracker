@@ -6,7 +6,16 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('user');
-    return saved ? JSON.parse(saved) : null;
+    if (!saved) return null;
+    try {
+      const parsed = JSON.parse(saved);
+      if (parsed && (!parsed.defaultCurrency || parsed.defaultCurrency === 'USD')) {
+        parsed.defaultCurrency = 'INR';
+      }
+      return parsed;
+    } catch {
+      return null;
+    }
   });
   const [token, setToken] = useState(() => localStorage.getItem('token') || null);
   const [loading, setLoading] = useState(true);
@@ -16,8 +25,12 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         try {
           const profile = await authService.getMe();
-          setUser(profile.user);
-          localStorage.setItem('user', JSON.stringify(profile.user));
+          const u = profile.user;
+          if (u && (!u.defaultCurrency || u.defaultCurrency === 'USD')) {
+            u.defaultCurrency = 'INR';
+          }
+          setUser(u);
+          localStorage.setItem('user', JSON.stringify(u));
         } catch {
           logout();
         }

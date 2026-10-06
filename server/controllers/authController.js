@@ -66,13 +66,18 @@ const login = async (req, res, next) => {
 
     const token = generateToken(user._id);
 
+    if (!user.defaultCurrency || user.defaultCurrency === 'USD') {
+      user.defaultCurrency = 'INR';
+      await user.save();
+    }
+
     return sendSuccess(res, 200, 'Logged in successfully', {
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
         avatarUrl: user.avatarUrl,
-        defaultCurrency: user.defaultCurrency
+        defaultCurrency: user.defaultCurrency || 'INR'
       },
       token
     });
@@ -83,13 +88,18 @@ const login = async (req, res, next) => {
 
 const getMe = async (req, res, next) => {
   try {
+    if (!req.user.defaultCurrency || req.user.defaultCurrency === 'USD') {
+      await User.findByIdAndUpdate(req.user._id, { defaultCurrency: 'INR' });
+      req.user.defaultCurrency = 'INR';
+    }
+
     return sendSuccess(res, 200, 'User profile fetched', {
       user: {
         id: req.user._id,
         name: req.user.name,
         email: req.user.email,
         avatarUrl: req.user.avatarUrl,
-        defaultCurrency: req.user.defaultCurrency
+        defaultCurrency: req.user.defaultCurrency || 'INR'
       }
     });
   } catch (error) {

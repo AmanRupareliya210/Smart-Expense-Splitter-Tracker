@@ -243,7 +243,7 @@ export const ExpenseModal = ({ isOpen, onClose, group, onExpenseSaved, existingE
           </div>
 
           <div className="form-group">
-            <label className="form-label">Total Amount ({group?.currency || 'USD'}) *</label>
+            <label className="form-label">Total Amount ({group?.currency || 'INR'}) *</label>
             <div style={{ position: 'relative' }}>
               <input
                 type="number"

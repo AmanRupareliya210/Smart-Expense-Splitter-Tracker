@@ -22,7 +22,7 @@ export const DebtMinimizerView = ({
   groupId,
   balances,
   onSettleClick,
-  currency = 'USD',
+  currency = 'INR',
   onSettlementChange
 }) => {
   const { user } = useAuth();
