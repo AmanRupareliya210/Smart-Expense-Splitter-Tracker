@@ -4,25 +4,31 @@
   "description": "Smart Expense Splitter & Tracker full-stack application",
   "main": "api/index.js",
   "scripts": {
-    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
-    "server": "npm run dev --prefix server",
-    "client": "npm run dev --prefix client",
     "dev": "node run-dev.js",
-    "test": "npm test --prefix server",
-    "build": "npm run build --prefix client"
+    "build": "node node_modules/vite/bin/vite.js build client",
+    "test": "npm test --prefix server"
   },
   "dependencies": {
+    "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
+    "canvas-confetti": "^1.9.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-rate-limit": "^7.2.0",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^1.52.0",
     "mongoose": "^8.3.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^8.2.2",
+    "vite": "^8.3.0"
   }
 }
