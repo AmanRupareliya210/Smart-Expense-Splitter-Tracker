@@ -91,7 +91,8 @@ const getMyGroups = async (req, res, next) => {
     }
 
     if (search && search.trim()) {
-      query.name = { $regex: search.trim(), $options: 'i' };
+      const sanitized = search.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query.name = { $regex: sanitized, $options: 'i' };
     }
 
     const groups = await Group.find(query)

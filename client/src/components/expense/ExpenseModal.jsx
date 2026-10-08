@@ -3,8 +3,8 @@ import { Modal } from '../common/Modal';
 import { CATEGORIES, SPLIT_TYPES } from '../../utils/constants';
 import { expenseService } from '../../services/expenseService';
 import { useAuth } from '../../context/AuthContext';
-import { formatCurrency, getInitials } from '../../utils/formatters';
-import { IndianRupee, Calendar, Check, AlertCircle, Sparkles } from 'lucide-react';
+import { formatCurrency } from '../../utils/formatters';
+import { Check, AlertCircle, Sparkles } from 'lucide-react';
 
 export const ExpenseModal = ({ isOpen, onClose, group, onExpenseSaved, existingExpense = null }) => {
   const { user } = useAuth();
@@ -43,13 +43,14 @@ export const ExpenseModal = ({ isOpen, onClose, group, onExpenseSaved, existingE
         setNotes(existingExpense.notes || '');
 
         const currentSplits = existingExpense.splits || [];
-        setSelectedUserIds(new Set(currentSplits.map((s) => s.userId?._id || s.userId)));
+        setSelectedUserIds(new Set(currentSplits.map((s) => (s.userId?._id || s.userId)?.toString()).filter(Boolean)));
 
         const exMap = {};
         const percMap = {};
         const shareMap = {};
         currentSplits.forEach((s) => {
-          const uid = s.userId?._id || s.userId;
+          const uid = (s.userId?._id || s.userId)?.toString();
+          if (!uid) return;
           if (s.amount) exMap[uid] = (s.amount / 100).toString();
           if (s.percentage) percMap[uid] = s.percentage.toString();
           if (s.shares) shareMap[uid] = s.shares.toString();
@@ -60,15 +61,16 @@ export const ExpenseModal = ({ isOpen, onClose, group, onExpenseSaved, existingE
       } else {
         // Default new expense
         setTitle('');
-        setTotalAmount('');
-        setPaidBy(user?.id || (members[0]?.userId?._id || ''));
+        const currentUserId = user?.id || user?._id;
+        const firstMemberId = (members[0]?.userId?._id || members[0]?.userId || '')?.toString();
+        setPaidBy(currentUserId || firstMemberId);
         setCategory('General');
         setSplitType('EQUAL');
         setExpenseDate(new Date().toISOString().split('T')[0]);
         setNotes('');
         
         // Select all members by default for equal split
-        const allIds = new Set(members.map((m) => m.userId?._id));
+        const allIds = new Set(members.map((m) => (m.userId?._id || m.userId)?.toString()).filter(Boolean));
         setSelectedUserIds(allIds);
 
         // Initialize default percentages and shares
@@ -76,7 +78,8 @@ export const ExpenseModal = ({ isOpen, onClose, group, onExpenseSaved, existingE
         const shr = {};
         const equalPerc = (100 / Math.max(members.length, 1)).toFixed(2);
         members.forEach((m) => {
-          const uid = m.userId?._id;
+          const uid = (m.userId?._id || m.userId)?.toString();
+          if (!uid) return;
           perc[uid] = equalPerc;
           shr[uid] = '1';
         });
@@ -142,7 +145,7 @@ export const ExpenseModal = ({ isOpen, onClose, group, onExpenseSaved, existingE
       const currentExact = getExactTotal();
       if (Math.abs(currentExact - numericTotal) > 0.01) {
         setError(
-          `Exact amounts sum ($${currentExact.toFixed(2)}) must equal total amount ($${numericTotal.toFixed(2)})`
+          `Exact amounts sum (${formatCurrency(Math.round(currentExact * 100), group?.currency)}) must equal total amount (${formatCurrency(Math.round(numericTotal * 100), group?.currency)})`
         );
         return;
       }

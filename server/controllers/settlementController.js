@@ -85,12 +85,13 @@ const recordSettlement = async (req, res, next) => {
       User.findById(receiverId).select('name email')
     ]);
 
+    const currSymbol = group.currency === 'INR' ? '₹' : (group.currency === 'EUR' ? '€' : (group.currency === 'GBP' ? '£' : '$'));
     await ActivityLog.create({
       groupId: group._id,
       performedBy: req.user._id,
       action: 'SETTLEMENT_RECORDED',
       targetId: settlement._id,
-      summary: `${payerUser?.name || 'Member'} recorded a payment of $${toDecimal(settleCents)} to ${receiverUser?.name || 'Member'} (${finalMethod}).`,
+      summary: `${payerUser?.name || 'Member'} recorded a payment of ${currSymbol}${toDecimal(settleCents)} to ${receiverUser?.name || 'Member'} (${finalMethod}).`,
       metadata: {
         amount: settleCents,
         paidBy: payerId,
@@ -300,12 +301,13 @@ const reverseSettlement = async (req, res, next) => {
 
     await settlement.save();
 
+    const currSymbol = group.currency === 'INR' ? '₹' : (group.currency === 'EUR' ? '€' : (group.currency === 'GBP' ? '£' : '$'));
     await ActivityLog.create({
       groupId: group._id,
       performedBy: req.user._id,
       action: 'SETTLEMENT_REVERSED',
       targetId: settlement._id,
-      summary: `${req.user.name} reversed settlement payment of $${toDecimal(settlement.amount)} (Reason: ${reason}).`,
+      summary: `${req.user.name} reversed settlement payment of ${currSymbol}${toDecimal(settlement.amount)} (Reason: ${reason}).`,
       metadata: {
         settlementId: settlement._id,
         amount: settlement.amount,

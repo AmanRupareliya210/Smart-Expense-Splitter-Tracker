@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Modal } from '../common/Modal';
 import { groupService } from '../../services/groupService';
 import { authService } from '../../services/authService';
-import { Link, Copy, Check, UserPlus, Shield, Trash2, Mail, Users, Clock, AlertCircle } from 'lucide-react';
+import { Link, Copy, Check, UserPlus, Trash2, Mail, Clock, AlertCircle } from 'lucide-react';
 
 export const InviteModal = ({ isOpen, onClose, groupId, onMemberAdded }) => {
   const [activeTab, setActiveTab] = useState('link'); // 'link' | 'email'
@@ -14,7 +14,6 @@ export const InviteModal = ({ isOpen, onClose, groupId, onMemberAdded }) => {
   const [linkLoading, setLinkLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [pendingInvites, setPendingInvites] = useState([]);
-  const [loadingInvites, setLoadingInvites] = useState(false);
   
   // Email direct invite state
   const [email, setEmail] = useState('');
@@ -26,18 +25,15 @@ export const InviteModal = ({ isOpen, onClose, groupId, onMemberAdded }) => {
   const [success, setSuccess] = useState('');
 
   // Load existing pending invites when opening link tab
-  const loadPendingInvites = async () => {
+  const loadPendingInvites = useCallback(async () => {
     if (!groupId) return;
     try {
-      setLoadingInvites(true);
       const invites = await groupService.getGroupInvitations(groupId);
       setPendingInvites(invites || []);
     } catch {
       // Ignore
-    } finally {
-      setLoadingInvites(false);
     }
-  };
+  }, [groupId]);
 
   useEffect(() => {
     if (isOpen) {
@@ -46,7 +42,7 @@ export const InviteModal = ({ isOpen, onClose, groupId, onMemberAdded }) => {
       setCopied(false);
       loadPendingInvites();
     }
-  }, [isOpen, groupId]);
+  }, [isOpen, loadPendingInvites]);
 
   // Generate a new secure link
   const handleGenerateLink = async () => {
@@ -387,6 +383,11 @@ export const InviteModal = ({ isOpen, onClose, groupId, onMemberAdded }) => {
                 color="var(--text-muted)"
                 style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }}
               />
+              {searching && (
+                <span style={{ position: 'absolute', right: '0.85rem', top: '50%', transform: 'translateY(-50%)', fontSize: '0.75rem', color: 'var(--accent-primary)' }}>
+                  Searching...
+                </span>
+              )}
             </div>
 
             {/* Autocomplete suggestions dropdown */}

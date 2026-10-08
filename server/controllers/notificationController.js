@@ -227,8 +227,8 @@ const sendSettlementReminder = async (req, res, next) => {
 
     const debtAmount = debtorBalance && debtorBalance.netBalance < 0
       ? Math.abs(debtorBalance.netBalance)
-      : (balances.suggestedSettlements || [])
-          .filter((s) => s.from === debtorId.toString() && s.to === creditor._id.toString())
+      : (balances.simplifiedSettlements || balances.suggestedSettlements || [])
+          .filter((s) => (s.from?.id || s.from) === debtorId.toString() && (s.to?.id || s.to) === creditor._id.toString())
           .reduce((acc, s) => acc + s.amount, 0);
 
     // Send notification to debtor

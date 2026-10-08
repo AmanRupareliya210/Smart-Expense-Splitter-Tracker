@@ -90,12 +90,13 @@ const addExpense = async (req, res, next) => {
       createdBy: req.user._id
     });
 
+    const currSymbol = group.currency === 'INR' ? '₹' : (group.currency === 'EUR' ? '€' : (group.currency === 'GBP' ? '£' : '$'));
     await ActivityLog.create({
       groupId: group._id,
       performedBy: req.user._id,
       action: 'EXPENSE_ADDED',
       targetId: expense._id,
-      summary: `${req.user.name} recorded expense "${expense.title}" for $${toDecimal(totalCents)} (${finalSplitType} split).`,
+      summary: `${req.user.name} recorded expense "${expense.title}" for ${currSymbol}${toDecimal(totalCents)} (${finalSplitType} split).`,
       metadata: { totalAmount: totalCents, splitType: finalSplitType, category: selectedCategory }
     });
 

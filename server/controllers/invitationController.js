@@ -137,8 +137,8 @@ const getInvitationPreview = async (req, res, next) => {
       .populate('groupId', 'name description category currency members')
       .populate('invitedBy', 'name avatarUrl');
 
-    if (!invitation) {
-      return next(new ApiError(404, 'Invitation link not found or invalid.'));
+    if (!invitation || !invitation.groupId) {
+      return next(new ApiError(404, 'Invitation link not found or group no longer exists.'));
     }
 
     const isExpired = new Date() > new Date(invitation.expiresAt);
@@ -183,8 +183,8 @@ const acceptInvitation = async (req, res, next) => {
     const tokenHash = hashToken(token);
     const invitation = await Invitation.findOne({ tokenHash }).populate('groupId');
 
-    if (!invitation) {
-      return next(new ApiError(404, 'Invitation not found or invalid.'));
+    if (!invitation || !invitation.groupId) {
+      return next(new ApiError(404, 'Invitation not found or group no longer exists.'));
     }
 
     if (invitation.status === 'revoked') {
@@ -197,7 +197,8 @@ const acceptInvitation = async (req, res, next) => {
       return next(new ApiError(400, 'This invitation link has expired.'));
     }
 
-    const group = await Group.findById(invitation.groupId._id);
+    const groupId = invitation.groupId._id || invitation.groupId;
+    const group = await Group.findById(groupId);
     if (!group) {
       return next(new ApiError(404, 'The associated group no longer exists.'));
     }

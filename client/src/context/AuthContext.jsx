@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     if (!saved) return null;
     try {
       const parsed = JSON.parse(saved);
-      if (parsed && (!parsed.defaultCurrency || parsed.defaultCurrency === 'USD')) {
+      if (parsed && !parsed.defaultCurrency) {
         parsed.defaultCurrency = 'INR';
       }
       return parsed;
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         try {
           const profile = await authService.getMe();
           const u = profile.user;
-          if (u && (!u.defaultCurrency || u.defaultCurrency === 'USD')) {
+          if (u && !u.defaultCurrency) {
             u.defaultCurrency = 'INR';
           }
           setUser(u);

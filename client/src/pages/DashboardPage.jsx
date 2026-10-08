@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useGroup } from '../context/GroupContext';
 import { useAuth } from '../context/AuthContext';
 import { analyticsService } from '../services/analyticsService';
-import { formatCurrency, formatDate, formatDateTime, getInitials } from '../utils/formatters';
+import { formatCurrency, formatDate, formatDateTime } from '../utils/formatters';
 import { GROUP_CATEGORIES, CATEGORIES } from '../utils/constants';
 import {
   Users,
@@ -13,16 +13,13 @@ import {
   Wallet,
   ChevronRight,
   Archive,
-  RotateCcw,
   ShieldCheck,
   Crown,
-  Receipt,
   CheckCircle2,
   History,
   TrendingUp,
   PieChart,
   RefreshCw,
-  Sparkles,
   IndianRupee
 } from 'lucide-react';
 
@@ -65,7 +62,7 @@ export const DashboardPage = ({ onSelectGroup, onOpenCreateGroup }) => {
     return matchesSearch && matchesCat;
   });
 
-  const currency = (user?.defaultCurrency && user.defaultCurrency !== 'USD') ? user.defaultCurrency : 'INR';
+  const currency = user?.defaultCurrency || 'INR';
   const totalPaid = dashboardData?.summary?.totalExpensesPaid ?? globalSummary?.totalExpensesPaid ?? 0;
   const totalOwed = dashboardData?.summary?.totalOwedToUser ?? globalSummary?.totalOwedToUser ?? 0;
   const totalOwes = dashboardData?.summary?.totalUserOwes ?? globalSummary?.totalUserOwes ?? 0;

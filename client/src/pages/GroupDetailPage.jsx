@@ -35,11 +35,9 @@ import {
   Archive,
   RotateCcw,
   LogOut,
-  MoreVertical,
   AlertTriangle,
   CheckCircle,
   Search,
-  Filter,
   Eye,
   X
 } from 'lucide-react';
@@ -215,7 +213,7 @@ export const GroupDetailPage = ({ groupId, onBack }) => {
     emoji: '📂',
     label: 'Other'
   };
-  const currency = (activeGroup.currency && activeGroup.currency !== 'USD') ? activeGroup.currency : 'INR';
+  const currency = activeGroup.currency || 'INR';
   const totalSpending = groupBalances?.totalSpending || 0;
   const isOwner = activeUserRole === 'owner';
   const isAdmin = activeUserRole === 'admin' || isOwner;

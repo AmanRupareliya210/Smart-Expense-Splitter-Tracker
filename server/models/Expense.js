@@ -55,8 +55,7 @@ const expenseSchema = new mongoose.Schema(
     paidBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
-      index: true
+      required: true
     },
     splitType: {
       type: String,

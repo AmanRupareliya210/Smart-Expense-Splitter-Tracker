@@ -29,8 +29,6 @@
  *      reduction offers near-optimal settlement simplicity with guaranteed correctness.
  */
 
-const ApiError = require('../utils/apiError');
-
 /**
  * Calculates minimal transfer transactions to resolve all group debts.
  *

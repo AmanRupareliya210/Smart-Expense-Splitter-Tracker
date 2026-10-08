@@ -66,7 +66,7 @@ const login = async (req, res, next) => {
 
     const token = generateToken(user._id);
 
-    if (!user.defaultCurrency || user.defaultCurrency === 'USD') {
+    if (!user.defaultCurrency) {
       user.defaultCurrency = 'INR';
       await user.save();
     }
@@ -88,7 +88,7 @@ const login = async (req, res, next) => {
 
 const getMe = async (req, res, next) => {
   try {
-    if (!req.user.defaultCurrency || req.user.defaultCurrency === 'USD') {
+    if (!req.user.defaultCurrency) {
       await User.findByIdAndUpdate(req.user._id, { defaultCurrency: 'INR' });
       req.user.defaultCurrency = 'INR';
     }
@@ -144,10 +144,11 @@ const searchUsers = async (req, res, next) => {
       return sendSuccess(res, 200, 'Users query results', []);
     }
 
+    const sanitizedQuery = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const users = await User.find({
       $or: [
-        { email: { $regex: query, $options: 'i' } },
-        { name: { $regex: query, $options: 'i' } }
+        { email: { $regex: sanitizedQuery, $options: 'i' } },
+        { name: { $regex: sanitizedQuery, $options: 'i' } }
       ]
     })
       .select('name email avatarUrl')
@@ -179,7 +180,7 @@ const quickLogin = async (req, res, next) => {
         user.email = adminEmail;
         modified = true;
       }
-      if (!user.defaultCurrency || user.defaultCurrency === 'USD') {
+      if (!user.defaultCurrency) {
         user.defaultCurrency = 'INR';
         modified = true;
       }

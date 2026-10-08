@@ -28,8 +28,12 @@ export const SettlementModal = ({
 
   useEffect(() => {
     if (isOpen) {
-      setPaidBy(defaultPayer || user?.id || (members[0]?.userId?._id || ''));
-      setPaidTo(defaultReceiver || (members[1]?.userId?._id || ''));
+      const currentUserId = (user?.id || user?._id)?.toString();
+      const firstId = (members[0]?.userId?._id || members[0]?.userId)?.toString() || '';
+      const secondId = (members[1]?.userId?._id || members[1]?.userId)?.toString() || '';
+
+      setPaidBy(defaultPayer || currentUserId || firstId);
+      setPaidTo(defaultReceiver || (currentUserId === firstId ? secondId : firstId));
       setAmount(defaultAmount ? (defaultAmount / 100).toFixed(2) : '');
       setPaymentMethod('UPI');
       setNotes('');
@@ -123,11 +127,15 @@ export const SettlementModal = ({
               onChange={(e) => setPaidBy(e.target.value)}
               required
             >
-              {members.map((m) => (
-                <option key={m.userId?._id} value={m.userId?._id}>
-                  {m.userId?.name} {m.userId?._id === user?.id ? '(You)' : ''}
-                </option>
-              ))}
+              {members.map((m) => {
+                const uid = (m.userId?._id || m.userId)?.toString();
+                const currentUserId = (user?.id || user?._id)?.toString();
+                return (
+                  <option key={uid} value={uid}>
+                    {m.userId?.name || 'Member'} {uid === currentUserId ? '(You)' : ''}
+                  </option>
+                );
+              })}
             </select>
           </div>
 
@@ -154,11 +162,15 @@ export const SettlementModal = ({
               onChange={(e) => setPaidTo(e.target.value)}
               required
             >
-              {members.map((m) => (
-                <option key={m.userId?._id} value={m.userId?._id}>
-                  {m.userId?.name} {m.userId?._id === user?.id ? '(You)' : ''}
-                </option>
-              ))}
+              {members.map((m) => {
+                const uid = (m.userId?._id || m.userId)?.toString();
+                const currentUserId = (user?.id || user?._id)?.toString();
+                return (
+                  <option key={uid} value={uid}>
+                    {m.userId?.name || 'Member'} {uid === currentUserId ? '(You)' : ''}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </div>

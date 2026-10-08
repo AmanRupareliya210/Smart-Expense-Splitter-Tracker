@@ -8,7 +8,6 @@ import {
   Users,
   IndianRupee,
   Calendar,
-  Filter,
   BarChart3,
   Receipt,
   RotateCcw
